@@ -2,6 +2,8 @@
 
 Chat bot + OpenAI gpt-3.5-turbo.
 
+[![Development Note p.340](https://img.youtube.com/vi/0cbJv22SdaA/0.jpg)](https://www.youtube.com/watch?v=0cbJv22SdaA)
+
 ## How to run
 
 ### Clone this repository
