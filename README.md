@@ -4,9 +4,22 @@
 
 2023년판과 달리 AI 응답은 외부 API나 API 키 없이 내 컴퓨터의 체크포인트에서 생성합니다. PyTorch로 구현한 소형 문자 단위 Transformer를 사전 학습 가중치 없이 처음부터 학습합니다. 디스코드 연결에는 인터넷과 디스코드 봇 토큰이 필요하지만, 모델 학습·평가·직접 질문은 설치 후 오프라인에서 할 수 있습니다.
 
+**디스코드 테스트 기본값은 [일상 대화 검색 모델](docs/daily-model.md)입니다.** 생성형 Transformer 실험은 비교 및 재학습용으로 남아 있습니다. 검색 모델은 Python 표준 라이브러리만 사용하며, 검수한 10개 상황에 답하고 확신이 낮으면 다시 물어봅니다.
+
+## 일상 대화 모델 받기
+
+이 프로젝트의 **파일 탭**에서 `newai-daily-model.zip`을 다운로드하거나, GitHub의 PR에서 성공한 **NewAI daily model** 실행을 열고 **Artifacts → newai-daily-model**을 받으세요. 압축 파일 내용은 `checkpoints/daily-final/`에 풉니다. GitHub 아티팩트는 로그인 후 30일간 받을 수 있습니다. CLI를 사용한다면 실행 주소 `/actions/runs/` 뒤의 숫자를 복사해 넣으세요.
+
+```sh
+npm run model:download -- <실행_번호>
+python model/daily_model.py ask "안녕!"
+```
+
+다운로드 명령은 GitHub CLI에 로그인한 상태에서 사용하고, 기존 모델 폴더는 덮어쓰지 않습니다. 아티팩트가 만료됐으면 [로컬 생성 방법](docs/daily-model.md#재현)으로 다시 만들 수 있습니다. 디스코드에서는 `npm ci` 후 `DISCORD_BOT_TOKEN`을 설정하고 `npm start`를 실행하세요. 이전 실험용 `NEWAI_CHECKPOINT`를 설정했다면 해제하거나 `checkpoints/daily-final/model.json`으로 바꿔야 새 모델이 사용됩니다. 서버 텍스트 채널에서 자동완성으로 실제 봇을 선택해 **`@NewAI 안녕!`**을 보내세요.
+
 ## 1. 준비
 
-Node.js 22.12 이상, Python 3.11~3.13을 사용하세요. Python 가상 환경을 만든 후 활성화합니다.
+Node.js 22.12 이상, Python 3.11~3.13을 사용하세요. 아래 가상 환경과 PyTorch 설치는 생성형 비교 실험을 실행할 때만 필요합니다.
 
 ```sh
 npm ci
@@ -81,6 +94,24 @@ python model/newai.py ask --checkpoint checkpoints/ua-n1-5a65364/best.pt "안녕
 
 체크포인트 묶음에서 `best.pt`와 `last.pt`를 `checkpoints/ua-n1-5a65364/`에 풀면 위 직접 질문·평가 명령으로 확인할 수 있습니다. 디스코드에서 사용하려면 `NEWAI_CHECKPOINT`를 `checkpoints/ua-n1-5a65364/best.pt`로 지정하세요.
 
+### 일상 대화 확장 실험
+
+[Youngsook Song의 Chatbot_data_for_Korean v1.0](https://github.com/songys/Chatbot_data/tree/4cf20d13fc46f5037fd1c531cd566e2dd9f72974) ([MIT](https://github.com/songys/Chatbot_data/blob/4cf20d13fc46f5037fd1c531cd566e2dd9f72974/LICENSE))에서 일상 라벨(`0`)만 선택했습니다. 이별과 사랑 라벨은 제외했습니다. 원본과 추가 데이터에서 길이 제한, 빈 텍스트, 한글 없는 문답, 연락처·링크 패턴, 중복 및 짧은 되풀이 답변을 걸러냅니다. 추가 데이터에서는 기존 질문과 겹치는 질문을 빼고, 같은 답변이 최대 12번만 남도록 제한합니다. 이 규칙은 사람이 문맥·개인정보·안전성을 완전히 검수한 것을 대신하지 않습니다.
+
+`dataset/daily/`에 UA-N1-Queen과 같은 `user`/`assistant` 구조의 JSONL 8개와 필터 집계 `preparation.json`을 생성합니다. 기존 UA-N1-Queen 파일이나 체크포인트는 덮어쓰지 않습니다. 이 실험에서는 UA-N1-Queen 800쌍과 추가 일상 대화 5,202쌍, 총 6,002쌍이 남았습니다.
+
+```sh
+python model/fetch_dataset.py
+python model/prepare_daily.py
+python model/newai.py train --data dataset/daily --out checkpoints/daily-v2 --limit 0 --context 96 --group-normalized --epochs 10
+python model/newai.py evaluate --data dataset/daily --checkpoint checkpoints/daily-v2/best.pt
+python model/compare_daily.py
+```
+
+확장 실험의 `--group-normalized`는 공백이나 문장부호만 다른 질문을 같은 분할에 둡니다. `compare_daily.py`는 기존 모델과 확장 모델에 같은 질문을 주고 응답을 나란히 보여 줍니다. 공백·문장부호 등을 제외한 질문이 양쪽 중 어느 한 모델의 학습·검증 데이터와 완전히 일치하면 해당 질문은 비교에서 건너뜁니다. 각 모델의 자체 테스트 퍼플렉서티는 분할과 문자 사전이 달라 직접 비교하지 않습니다. 모델 구조는 두 실험 모두 마스킹된 자기 어텐션을 쓰는 문자 단위 Transformer이며, 이전 대화를 함께 넘기지 않으므로 여러 턴에 걸친 맥락은 여전히 처리할 수 없습니다.
+
+직접 응답은 (1) 인사에 인사, 감사에 감사 수용처럼 사용자의 말에 맞게 이어지는지, (2) 사용자가 말한 감정이나 상황을 엉뚱하게 바꾸지 않는지, (3) 추천 요청에 실제로 할 수 있는 행동을 제안하는지로 확인합니다. 문장처럼 보이기만 하거나 질문을 되풀이하는 답은 통과로 보지 않습니다. 12개로 한정한 탐색 점검이며 사람의 판단이 필요한 서비스 품질 검증을 대신하지 않습니다.
+
 ## 3. 디스코드 실행
 
 디스코드 개발자 포털에서 봇을 만든 후, 테스트 서버에 초대하고 채널 보기·메시지 보내기·메시지 기록 읽기 권한을 주세요. 토큰은 코드나 채팅에 넣지 말고 로컬 터미널의 `DISCORD_BOT_TOKEN` 환경 변수로만 설정하세요.
@@ -97,7 +128,7 @@ export DISCORD_BOT_TOKEN='<내 봇 토큰>'
 npm start
 ```
 
-서버 채널에서 `@봇이름 질문`으로 호출하세요. 봇을 직접 멘션한 메시지에만 답하며 대화 기록을 저장하지 않습니다. `npm start`는 활성화된 Python 환경을 사용합니다. 다른 Python 실행 파일을 쓰려면 `NEWAI_PYTHON`에 그 경로를, 다른 체크포인트를 쓰려면 `NEWAI_CHECKPOINT`를 설정하세요.
+서버 채널에서 `@봇이름 질문`으로 호출하세요. 봇을 직접 멘션한 메시지에만 답하며 대화 기록을 저장하지 않습니다. `npm start`의 기본 체크포인트는 `checkpoints/daily-final/model.json`입니다. 다른 Python 실행 파일을 쓰려면 `NEWAI_PYTHON`에 그 경로를, 비교용 `.pt`를 사용하려면 `NEWAI_CHECKPOINT`에 그 파일 경로를 지정하세요.
 
 ## 개발 점검
 

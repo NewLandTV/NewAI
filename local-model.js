@@ -4,9 +4,10 @@ const path = require('node:path');
 
 class LocalModel {
     constructor({ python = process.env.NEWAI_PYTHON || (process.platform === 'win32' ? 'python' : 'python3'),
-        checkpoint = process.env.NEWAI_CHECKPOINT || 'checkpoints/best.pt' } = {}) {
+        checkpoint = process.env.NEWAI_CHECKPOINT || 'checkpoints/daily-final/model.json' } = {}) {
         const { DISCORD_BOT_TOKEN: _token, ...modelEnv } = process.env;
-        this.child = spawn(python, [path.join(__dirname, 'model', 'newai.py'), 'serve',
+        const script = path.extname(checkpoint).toLowerCase() === '.json' ? 'daily_model.py' : 'newai.py';
+        this.child = spawn(python, [path.join(__dirname, 'model', script), 'serve',
             '--checkpoint', path.resolve(checkpoint)], { env: modelEnv, stdio: ['pipe', 'pipe', 'inherit'] });
         this.ready = this.waitFor('ready', 30_000);
         this.lines = createInterface({ input: this.child.stdout });
