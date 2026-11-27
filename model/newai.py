@@ -49,7 +49,7 @@ def dialogue(row):
                 prompt = ''
 
 
-def load_data(directory, limit, seed):
+def load_data(directory, limit, seed, group_normalized=False):
     paths = [Path(directory) / f'train_part_{i}.jsonl' for i in range(8)]
     missing = [path.name for path in paths if not path.is_file()]
     if missing:
@@ -76,8 +76,10 @@ def load_data(directory, limit, seed):
                     if pair in seen:
                         continue
                     seen.add(pair)
-                    key = ' '.join(prompt.casefold().split())
-                    bucket = int.from_bytes(hashlib.sha256(f'{seed}:{key}'.encode()).digest()[:8], 'big') % 100
+                    split_key = ' '.join(prompt.casefold().split())
+                    if group_normalized:
+                        split_key = ''.join(char for char in split_key if char.isalnum())
+                    bucket = int.from_bytes(hashlib.sha256(f'{seed}:{split_key}'.encode()).digest()[:8], 'big') % 100
                     group = 'train' if bucket < 80 else 'validation' if bucket < 90 else 'test'
                     groups[group].append(pair)
                     fingerprint.update((json.dumps((group, prompt, answer), ensure_ascii=False) + '\n').encode())
@@ -208,7 +210,8 @@ def train(args):
     checkpoint = None
     if args.resume:
         model, tokenizer, checkpoint = restore(args.resume)
-    data_config = checkpoint['data_config'] if checkpoint else {'seed': args.seed, 'limit': args.limit}
+    data_config = (checkpoint['data_config'] if checkpoint else
+                   {'seed': args.seed, 'limit': args.limit, 'group_normalized': args.group_normalized})
     groups, fingerprint = load_data(args.data, **data_config)
     show({name: len(pairs) for name, pairs in groups.items()})
     if checkpoint:
@@ -300,6 +303,7 @@ def main():
     training.add_argument('--resume')
     training.add_argument('--seed', type=int, default=42)
     training.add_argument('--limit', type=int, default=2000, help='Maximum rows per file; 0 reads all rows.')
+    training.add_argument('--group-normalized', action='store_true', help='Keep punctuation and spacing variants in one split.')
     training.add_argument('--learning-rate', type=float, default=0.001)
     for name, default in [('epochs', 5), ('context', 128), ('width', 96), ('heads', 4),
                           ('layers', 2), ('batch-size', 16), ('vocab-size', 4096)]:

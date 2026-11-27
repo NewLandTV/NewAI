@@ -28,7 +28,7 @@ test('eight shards → checkpoint → resume → test metrics → local process 
             writeFileSync(path.join(data, `train_part_${shard}.jsonl`), lines.join('\n'));
         }
         const [split, first] = run('train', '--data', data, '--out', output, '--epochs', '1', '--width', '32',
-            '--layers', '1', '--context', '48', '--learning-rate', '0.01');
+            '--layers', '1', '--context', '48', '--learning-rate', '0.01', '--group-normalized');
         assert.equal(split.train + split.validation + split.test, 320);
         assert.equal(first.epoch, 1);
         assert.equal(first.best_saved, true);

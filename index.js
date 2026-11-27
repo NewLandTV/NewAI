@@ -14,7 +14,7 @@ async function main() {
     process.once('SIGINT', close);
     process.once('SIGTERM', close);
 
-    client.once(Events.ClientReady, () => console.log('NewAI 봇이 준비됐어요.'));
+    client.once(Events.ClientReady, () => console.log('NewAI 봇이 준비됐어요. 서버 채널에서 봇을 멘션하고 질문을 보내 주세요.'));
     client.on(Events.Error, () => console.error('디스코드 연결에 문제가 생겼어요.'));
     client.on(Events.MessageCreate, async (message) => {
         if (message.author.bot || !message.inGuild() || !message.mentions.users.has(client.user.id)) return;
