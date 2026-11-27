@@ -1,3 +1,3 @@
 @echo off
 cls
-node .
+node --env-file=.env index.js
