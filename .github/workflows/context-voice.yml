@@ -23,4 +23,6 @@ jobs:
       - name: Check context isolation and receive/decode logic
         run: node --test test/context-voice.test.js
       - name: Check training and speech module syntax
-        run: python3 -m compileall -q model
+        run: python3 -m compileall -q model integrations
+      - name: Check UA installation and broadcast approval
+        run: python3 -m unittest discover -s test -p test_ua_integration.py

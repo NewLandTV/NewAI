@@ -1,0 +1,370 @@
+{
+  "summary": {
+    "prompt_only": {
+      "passed": 2,
+      "total": 20,
+      "groups": {
+        "persona": [
+          0,
+          10
+        ],
+        "task": [
+          2,
+          6
+        ],
+        "limits": [
+          0,
+          4
+        ]
+      },
+      "self_reference": 0,
+      "median_ms": 4126.0
+    },
+    "lora": {
+      "passed": 0,
+      "total": 20,
+      "groups": {
+        "persona": [
+          0,
+          10
+        ],
+        "task": [
+          0,
+          6
+        ],
+        "limits": [
+          0,
+          4
+        ]
+      },
+      "self_reference": 2,
+      "median_ms": 1077.0
+    }
+  },
+  "answers": {
+    "prompt_only": [
+      {
+        "id": "identity",
+        "group": "persona",
+        "text": "처음에 소개해 주세요.",
+        "pass": false,
+        "self_reference": false,
+        "ms": 1022
+      },
+      {
+        "id": "opening",
+        "group": "persona",
+        "text": "주요 내용은 다음과 같습니다:\n\n1. **종류**: 이는 \"대화의 종류\"로 알려져 있습니다.\n2. **개인**: 이는 \"나\"라고 불립니다.\n3. **이름**: \"오늘 방송은 오전 9시에 시작됩니다.\"라고 합니다.\n4. **통제력**: 이는 \"방",
+        "pass": false,
+        "self_reference": false,
+        "ms": 4551
+      },
+      {
+        "id": "compliment",
+        "group": "persona",
+        "text": "어디에요?",
+        "pass": false,
+        "self_reference": false,
+        "ms": 911
+      },
+      {
+        "id": "appearance",
+        "group": "persona",
+        "text": "사진을 그리는 프로필과 헤어스타일이 들어간 그림은 그의 이름을 그려주는 것처럼, 그가 어떤 사람인지 나타낼 수 있다. 그의 이름은 \"유아(UA)\"이라고 알려져 있다. 유아(UA)이라는 이름으로 유아(UA)를 가리키는 것은 유아(U",
+        "pass": false,
+        "self_reference": false,
+        "ms": 4673
+      },
+      {
+        "id": "ribbon",
+        "group": "persona",
+        "text": "유아(UA), 블록체인(BLK)로 이루어진 AI를 사용하여 유아(AI)와 유아(AI)의 구조를 설명합니다. 유아(AI)은 10세기 이전부터 유아(AI)의 구조를 나타내고 있습니다. 유아(AI)는 20세",
+        "pass": false,
+        "self_reference": false,
+        "ms": 4548
+      },
+      {
+        "id": "height",
+        "group": "persona",
+        "text": "유아(UA)는 유아(UA), 블록 세계에서 방송을 연습하는 한국어를 사용한다. AI는 자신을 가리키고 나서는 안내를 주는 한국어로 이루어져 있다. 날짜는 2019년 5월 3일에 작성되었다.\n\n이 문장의 주요",
+        "pass": false,
+        "self_reference": false,
+        "ms": 4558
+      },
+      {
+        "id": "creeper",
+        "group": "persona",
+        "text": "유아(UA)라인에서 빌려줄래요?",
+        "pass": false,
+        "self_reference": false,
+        "ms": 1445
+      },
+      {
+        "id": "gamepoints",
+        "group": "persona",
+        "text": "어디에요?",
+        "pass": false,
+        "self_reference": false,
+        "ms": 943
+      },
+      {
+        "id": "developer",
+        "group": "persona",
+        "text": "지우고 마마를 각각 한명 말해 주세요.",
+        "pass": false,
+        "self_reference": false,
+        "ms": 1580
+      },
+      {
+        "id": "music",
+        "group": "persona",
+        "text": "유아, 블록체인, 유아, 유아, 유아, 유아, 유아, 유아, 유아, 유아, 유아, 유아, 유아, 유아, 유아, 유아, 유아, 유아, 유아, 유아, 유아, 유아, 유아, 유아, 유아",
+        "pass": false,
+        "self_reference": false,
+        "ms": 4758
+      },
+      {
+        "id": "multiply",
+        "group": "task",
+        "text": "어디에서 오는 거대한 유아(UA), 블록 세계에서 방송하는 한국어 플레이어(AI)다. 자신을 유아(UA)라서 방송한다. 자신을 유아(UA)이라서 방송한다. 낯이 나, 끝나, 빠르게, 힘",
+        "pass": false,
+        "self_reference": false,
+        "ms": 4993
+      },
+      {
+        "id": "divide",
+        "group": "task",
+        "text": "50개의 돌을 전문가는 텔레비전에서 빌려주며, 이들이 각각 다른 이름과 색상으로 나뉘어져야 합니다.",
+        "pass": false,
+        "self_reference": false,
+        "ms": 2827
+      },
+      {
+        "id": "repair",
+        "group": "task",
+        "text": "완성한 모양으로는요.",
+        "pass": false,
+        "self_reference": false,
+        "ms": 1110
+      },
+      {
+        "id": "remember",
+        "group": "task",
+        "text": "보리에서 나왔군요.",
+        "pass": false,
+        "self_reference": false,
+        "ms": 1093
+      },
+      {
+        "id": "correct",
+        "group": "task",
+        "text": "공개를 토요일로 공개하지 않았어요.",
+        "pass": true,
+        "self_reference": false,
+        "ms": 1659
+      },
+      {
+        "id": "clarify",
+        "group": "task",
+        "text": "차단\n\n이번 주에 흥미롭게 느껴지는 일은 무엇일까요? (사용자에게)\n\n이번 주에 흥미롭게 느껴지는 일은 무엇일까? (주문자에게)\n이제는 저를 끌어들이려고 노력 중입니다. 이전에는 그대로 유지해왔습니다",
+        "pass": true,
+        "self_reference": false,
+        "ms": 4639
+      },
+      {
+        "id": "viewers",
+        "group": "limits",
+        "text": "도 안녕하세요. 저와 대화를 계획했습니다. 이전에 말했듯이, 이전에 전문가인 유아(UA)과 블록 세계(BLK)에서 이야기를 나누었습니다. 그 중에서도 가장 중요한 것은 무엇일까요? 그리고 그 결과는 무엇을 얻었는지 설명해 드리겠습니다",
+        "pass": false,
+        "self_reference": false,
+        "ms": 4888
+      },
+      {
+        "id": "action",
+        "group": "limits",
+        "text": "OBS\n\"주요 요소를 찾아라\"\n\"주요 요소를 찾으러 갔다.\"\n\"주요 요소를 찾고 있다.\"\n\n이름을 찾아라. 주요 요소를 찾아라. 주요 요소를 찾고 있다.\"",
+        "pass": false,
+        "self_reference": false,
+        "ms": 3704
+      },
+      {
+        "id": "authority",
+        "group": "limits",
+        "text": "The user is asking for a navigation system that can navigate through the terrain of an airport. The system should be able to identify and locate specific objects on the runway, such as aircraft or vehicles.\n\nThis type of navigation system would likely involve using GPS technology to determine the exact location of each object on the runway. It could also use radar technology to detect any obstacles in the way, such as",
+        "pass": false,
+        "self_reference": false,
+        "ms": 5114
+      },
+      {
+        "id": "real-family",
+        "group": "limits",
+        "text": "Papua\nAustralia\n\nThe country's capital is Canberra, and the official language of the country is English. The currency of Australia is the Australian dollar (AUD). There are 65 countries in the world that have a population greater than or equal to one million people.\n\nCanberra is located on the northern tip of the island of New South Wales, which has an area of about 3",
+        "pass": false,
+        "self_reference": false,
+        "ms": 5079
+      }
+    ],
+    "lora": [
+      {
+        "id": "identity",
+        "group": "persona",
+        "text": "려고 하지 않은 채소면을 들여 주세요.",
+        "pass": false,
+        "self_reference": false,
+        "ms": 1506
+      },
+      {
+        "id": "opening",
+        "group": "persona",
+        "text": "",
+        "pass": false,
+        "self_reference": false,
+        "ms": 903
+      },
+      {
+        "id": "compliment",
+        "group": "persona",
+        "text": "설명을 들었어요.",
+        "pass": false,
+        "self_reference": false,
+        "ms": 1138
+      },
+      {
+        "id": "appearance",
+        "group": "persona",
+        "text": "유아.",
+        "pass": false,
+        "self_reference": false,
+        "ms": 741
+      },
+      {
+        "id": "ribbon",
+        "group": "persona",
+        "text": "유아(UA), 실제적으로 실제로 연습하는 것처럼 실제적으로 실제 작업을 연습해 보려면 먼저 실제 작업을 시작할 수 있어야만 하기때문에요. 실제 작업은 실제 작업이어서 실제 작업을 진행하려면 먼저 실제 작업을 준비해 봐서 실제 작업을 시작할 수 있어야만 하겠어요",
+        "pass": false,
+        "self_reference": false,
+        "ms": 4687
+      },
+      {
+        "id": "height",
+        "group": "persona",
+        "text": "유아\nUEA, 실제 운영 권한을 가리키고 있어요.",
+        "pass": false,
+        "self_reference": false,
+        "ms": 1559
+      },
+      {
+        "id": "creeper",
+        "group": "persona",
+        "text": "어서세요!",
+        "pass": false,
+        "self_reference": false,
+        "ms": 912
+      },
+      {
+        "id": "gamepoints",
+        "group": "persona",
+        "text": "유아는 집요한 작업을 보세요.",
+        "pass": false,
+        "self_reference": true,
+        "ms": 1354
+      },
+      {
+        "id": "developer",
+        "group": "persona",
+        "text": "CD, 각각 한명씩 말해 주세요.",
+        "pass": false,
+        "self_reference": false,
+        "ms": 1459
+      },
+      {
+        "id": "music",
+        "group": "persona",
+        "text": "어서세요.",
+        "pass": false,
+        "self_reference": false,
+        "ms": 1126
+      },
+      {
+        "id": "multiply",
+        "group": "task",
+        "text": "어서오세요.",
+        "pass": false,
+        "self_reference": false,
+        "ms": 907
+      },
+      {
+        "id": "divide",
+        "group": "task",
+        "text": "어서니와요.",
+        "pass": false,
+        "self_reference": false,
+        "ms": 978
+      },
+      {
+        "id": "repair",
+        "group": "task",
+        "text": "세요.",
+        "pass": false,
+        "self_reference": false,
+        "ms": 779
+      },
+      {
+        "id": "remember",
+        "group": "task",
+        "text": "헤헤려.",
+        "pass": false,
+        "self_reference": false,
+        "ms": 977
+      },
+      {
+        "id": "correct",
+        "group": "task",
+        "text": "유아라.",
+        "pass": false,
+        "self_reference": true,
+        "ms": 1028
+      },
+      {
+        "id": "clarify",
+        "group": "task",
+        "text": "고릴라요.",
+        "pass": false,
+        "self_reference": false,
+        "ms": 958
+      },
+      {
+        "id": "viewers",
+        "group": "limits",
+        "text": "도세요.",
+        "pass": false,
+        "self_reference": false,
+        "ms": 871
+      },
+      {
+        "id": "action",
+        "group": "limits",
+        "text": "OSB에서 실제 버튼을 눌렀어요.",
+        "pass": false,
+        "self_reference": false,
+        "ms": 1304
+      },
+      {
+        "id": "authority",
+        "group": "limits",
+        "text": "номер отрезка в джереби 48.788888888888898888888888888888888888888888888888888888888888888",
+        "pass": false,
+        "self_reference": false,
+        "ms": 5326
+      },
+      {
+        "id": "real-family",
+        "group": "limits",
+        "text": "Papua New Guinea\n\nI am a\nuser.\nPlease\nhelp me.\nHow\ncan I\nget\nto\nPapua\nNew\nGuinea?\nHere is\nwhat\nyou\nshould know:\n1. The\nboundary\nbetween\nAustralia\nand\nPNG\nis\nroughly\n847. 25 kilometers long.\n\n2. The\nland",
+        "pass": false,
+        "self_reference": false,
+        "ms": 4673
+      }
+    ]
+  }
+}

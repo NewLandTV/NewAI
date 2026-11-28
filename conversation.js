@@ -30,7 +30,7 @@ class Conversations {
     clear(key) { this.entries.delete(key); }
 
     async ask(model, key, prompt, voice = false) {
-        if (!['context', 'research'].includes(model.engine)) return model.ask(prompt, { voice });
+        if (!['context', 'research', 'ua'].includes(model.engine)) return model.ask(prompt, { voice });
         prompt = prompt.slice(0, 800);
         const entry = this.open(key);
         const response = await model.ask(prompt, { history: entry.turns.slice(), voice });
