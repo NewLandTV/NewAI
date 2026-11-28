@@ -65,11 +65,12 @@ class ModelProcess {
 class LocalModel extends ModelProcess {
     constructor({ python, engine = process.env.NEWAI_ENGINE || 'daily',
         checkpoint = process.env.NEWAI_CHECKPOINT || 'checkpoints/daily-final/model.json' } = {}) {
-        if (!['daily', 'context', 'research'].includes(engine)) {
-            throw new Error('NEWAI_ENGINE은 daily, context, research 중 하나로 지정해 주세요.');
+        if (!['daily', 'context', 'research', 'ua'].includes(engine)) {
+            throw new Error('NEWAI_ENGINE은 daily, context, research, ua 중 하나로 지정해 주세요.');
         }
-        if (engine === 'context') {
-            super('gguf-context.mjs', ['serve'], { executable: process.execPath, startupTimeout: 120_000 });
+        if (engine === 'context' || engine === 'ua') {
+            super('gguf-context.mjs', [engine === 'ua' ? 'serve-ua' : 'serve'],
+                { executable: process.execPath, startupTimeout: 120_000 });
         } else if (engine === 'research') {
             const args = ['serve'];
             for (const [setting, option] of [['NEWAI_CONTEXT_BASE', '--base'], ['NEWAI_ADAPTER', '--adapter'],
@@ -85,7 +86,7 @@ class LocalModel extends ModelProcess {
     }
 
     ask(prompt, { history = [], voice = false } = {}) {
-        const timeout = this.engine === 'context' ? (voice ? 55_000 : 130_000) :
+        const timeout = ['context', 'ua'].includes(this.engine) ? (voice ? 55_000 : 130_000) :
             this.engine === 'research' ? 60_000 : 30_000;
         return this.request({ prompt, history, voice }, 'answer', timeout);
     }

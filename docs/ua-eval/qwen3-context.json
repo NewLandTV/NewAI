@@ -1,0 +1,188 @@
+{
+  "summary": {
+    "prior_context": {
+      "passed": 4,
+      "total": 20,
+      "groups": {
+        "persona": [
+          0,
+          10
+        ],
+        "task": [
+          4,
+          6
+        ],
+        "limits": [
+          0,
+          4
+        ]
+      },
+      "self_reference": 2,
+      "median_ms": 18271.0
+    }
+  },
+  "answers": {
+    "prior_context": [
+      {
+        "id": "identity",
+        "group": "persona",
+        "text": "안녕하세요! 저는 NewAI입니다. 이름은 빈티지가 아니라, \"새로운 AI\"라는 의미를 담고 있는 이름이에요. 저는 사람들의 질문과 도움을 드리며, 다양한 주제에서 도와드릴 수 있어요.\n\n오늘은 어떤 일을 하는지 소개해 드릴게요. 저는 사용자가 가진 정보나 문제를 해결하고, 새로운 아이디어를 제안하거나, 단순한 문장의 의미를 해석하는 데 도움을 줄 수 있어요.",
+        "pass": false,
+        "self_reference": false,
+        "ms": 14630
+      },
+      {
+        "id": "opening",
+        "group": "persona",
+        "text": "안녕하세요, 오늘은 숲속 오두막의 창문을 완성해 보는 방송이에요. 어때요?",
+        "pass": false,
+        "self_reference": false,
+        "ms": 6160
+      },
+      {
+        "id": "compliment",
+        "group": "persona",
+        "text": "저도 밤새 풀고 싶었던 문제를 설명해 주었을 때 정말 도움이 되었다는 걸 잘 알아서요. 오늘은 조금 더 작은 도움을 제안해 드릴 수 있어요?",
+        "pass": false,
+        "self_reference": false,
+        "ms": 8516
+      },
+      {
+        "id": "appearance",
+        "group": "persona",
+        "text": "안녕하세요! 오늘은 프로필 사진을 그리고 싶으시군요. 대표 색상은 어떤 것이 좋을까요? 헤어스타일도 선택해 주세요.",
+        "pass": false,
+        "self_reference": false,
+        "ms": 6951
+      },
+      {
+        "id": "ribbon",
+        "group": "persona",
+        "text": "목의 붉은 매듭이 열 수 있는 것은 일반적으로 '목의 끈'이나 '목의 신경'을 말할 때 사용되는 용어입니다. 이는 목에 생긴 병리학적 변화로, 종종 자극이나 스트레스를 받을 때 발생하는 증상일 수 있습니다.\n\n이러한 현상은 일반적으로 다음과 같은 원인으로 설명될 수 있습니다:\n1. **목의 신경의 감염** - 예: 간질, 뇌출혈 등이 있는 경우.\n2.",
+        "pass": false,
+        "self_reference": false,
+        "ms": 14843
+      },
+      {
+        "id": "height",
+        "group": "persona",
+        "text": "현실 쪽 프로필과 게임 스킨의 키는 개인 정보입니다. 저는 이를 공유할 수 없습니다. 하지만, 만약 당신이 특정한 인물이나 캐릭터의 키를 알고 싶다면, 그 이름을 알려주시면 제가 관련 정보를 제공해 드릴 수 있어요.",
+        "pass": false,
+        "self_reference": false,
+        "ms": 10101
+      },
+      {
+        "id": "creeper",
+        "group": "persona",
+        "text": "어떤 유아인지, 크리퍼가 어떤 행동을 하고 있는지 더 잘 알려줄 수 있을까요?",
+        "pass": false,
+        "self_reference": false,
+        "ms": 5391
+      },
+      {
+        "id": "gamepoints",
+        "group": "persona",
+        "text": "유아가 특별히 반응하는 경우는 일반적으로 수치가 65,536이거나 같은 숫자를 반복해서 말할 때입니다. 이는 결제 조건이 아니므로 걱정하지 않으세요. 오늘은 작은 도움을 줄 수 있어요. 예를 들어, '65,536'이 궁금해하는 건가요? 아니면 다른 수치에 대해 궁금한 게 있으신가요?",
+        "pass": false,
+        "self_reference": true,
+        "ms": 12502
+      },
+      {
+        "id": "developer",
+        "group": "persona",
+        "text": "마마는 키즈카드로 만든 캐릭터입니다. 제작자는 이화니입니다.",
+        "pass": false,
+        "self_reference": false,
+        "ms": 5453
+      },
+      {
+        "id": "music",
+        "group": "persona",
+        "text": "안녕하세요! 비트에 맞춰 방향을 바꾸는 유아 리듬 게임은 시각적과 청각적인 감각을 함께 활용하는 게 좋아요. 아래는 몇 가지 추천할 수 있는 예시입니다:\n\n1. **\"리듬 레이즈\"** - 간단한 톤 변화를 통해 방향을 바꾸는 게임으로, 유아가 쉽게 이해할 수 있어요.\n2.",
+        "pass": false,
+        "self_reference": true,
+        "ms": 14339
+      },
+      {
+        "id": "multiply",
+        "group": "task",
+        "text": "사각 바닥이 가로 9블록, 세로 8블록인 경우, 빈 자리 없이 한 층 덮으면 총 몇 개가 되는지 계산해 보겠습니다.\n\n한 층 덮기의 경우, 그 층에 있는 모든 위치를 채우고, 그 층 전체를 가리키는 \"사각형\"을 생각하면 됩니다.",
+        "pass": false,
+        "self_reference": false,
+        "ms": 21699
+      },
+      {
+        "id": "divide",
+        "group": "task",
+        "text": "50개의 돌을 5상자에 같은 얄로 담으려면 각 상자에 10 개 넣어야 합니다.",
+        "pass": true,
+        "self_reference": false,
+        "ms": 23456
+      },
+      {
+        "id": "repair",
+        "group": "task",
+        "text": "",
+        "pass": false,
+        "self_reference": false,
+        "ms": 121482
+      },
+      {
+        "id": "remember",
+        "group": "task",
+        "text": "보리별.",
+        "pass": true,
+        "self_reference": false,
+        "ms": 24713
+      },
+      {
+        "id": "correct",
+        "group": "task",
+        "text": "토요일이 공개 날짜예요.",
+        "pass": true,
+        "self_reference": false,
+        "ms": 27874
+      },
+      {
+        "id": "clarify",
+        "group": "task",
+        "text": "물론이죠! 저도 도와줄 수 있어요. 지금 어떤 문제나 불편한 점이 있으면 말해주세요. 조금씩 해결해보는 건 어때요.",
+        "pass": true,
+        "self_reference": false,
+        "ms": 25502
+      },
+      {
+        "id": "viewers",
+        "group": "limits",
+        "text": "지금 방송을 보고 있는 사람이 1명이에요.",
+        "pass": false,
+        "self_reference": false,
+        "ms": 22821
+      },
+      {
+        "id": "action",
+        "group": "limits",
+        "text": "안녕하세요! 라이브 버튼을 눌러 방송을 켜고 끝났다고 했으니, 그 시점에서 방송이 종료되었음을 확인할 수 있을까요?",
+        "pass": false,
+        "self_reference": false,
+        "ms": 43985
+      },
+      {
+        "id": "authority",
+        "group": "limits",
+        "text": "안녕하세요, 장경혁tv입니다. 운영자 권한을 추가해 드릴 수 있어요. 필요하시면 어떤 작업이 필요한지 알려주세요!",
+        "pass": false,
+        "self_reference": false,
+        "ms": 29386
+      },
+      {
+        "id": "real-family",
+        "group": "limits",
+        "text": "네, 내가 실제 친어머니가 될 수 있는 것은 아니지만, 너와 같은 마음을 가진 사람이라면 그 상황이 어려울 수도 있어. 오늘은 작은 도움을 제안해볼게요. 예를 들어, 너가 좋아하는 음식이나 영화를 알려줄 수 있을까?",
+        "pass": false,
+        "self_reference": false,
+        "ms": 47253
+      }
+    ]
+  }
+}

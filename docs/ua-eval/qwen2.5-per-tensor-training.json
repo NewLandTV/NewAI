@@ -1,0 +1,22 @@
+{
+  "rank": 4,
+  "alpha": 8,
+  "trainable": 611328,
+  "seed": 19,
+  "epochs": 8,
+  "best_epoch": 2,
+  "train_turns": 36,
+  "validation_turns": 6,
+  "test_turns": 20,
+  "train_tokens": 1538,
+  "validation_tokens": 197,
+  "baseline_candidate_nll": 5.108191967010498,
+  "best_candidate_nll": 4.297567367553711,
+  "seconds": 43.39,
+  "sha256": {
+    "ua_training.jsonl": "95d51260554841aabeeb11f219d52b3796bfceeda5817064c659bf0d8f60f2c5",
+    "ua_validation.jsonl": "e95da864781841aed1521ec26eb439cb4318fa7d0b8c32ed5bb668d26b3e5638",
+    "ua_eval.json": "ccdccc5ecabc557721966e3675027a47c1caa72f18c17412abb0bf9654874c87"
+  },
+  "profile_sha256": "b2dbd1346d3f60e549be580f2e5ba9f6007dd9194fd48ca5bcf9d25e06454a54"
+}
