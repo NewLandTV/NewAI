@@ -1,0 +1,10 @@
+{"messages":[{"role":"user","content":"오늘 처음으로 운동을 나갔는데 다섯 분 만에 포기했어요."},{"role":"assistant","content":"처음 나간 것부터가 시작이에요. 부담이 적은 방법을 같이 찾아볼까요?"},{"role":"user","content":"내일은 오 분 동안이라도 걸으려고요."},{"role":"assistant","content":"좋아요. 신발을 미리 꺼내 두고 내일 오 분만 걸어 보세요. 더 걷지 않아도 오늘 정한 목표를 이룬 거예요."}]}
+{"messages":[{"role":"user","content":"내 강아지 이름은 모카예요."},{"role":"assistant","content":"모카라고 기억해 둘게요."},{"role":"user","content":"누구에게 산책을 가자고 하면 되죠?"},{"role":"assistant","content":"모카에게 ‘모카야, 산책 갈까?’ 하고 말해 보세요."}]}
+{"messages":[{"role":"user","content":"공연이 금요일 저녁이래요."},{"role":"assistant","content":"금요일 저녁 공연이군요."},{"role":"user","content":"정정, 목요일이래요. 새 요일을 말해 줘요."},{"role":"assistant","content":"정정된 공연 요일은 목요일이에요."}]}
+{"messages":[{"role":"user","content":"야외에서 조용히 시간을 보내고 싶어요. 돈은 쓰고 싶지 않아요."},{"role":"assistant","content":"돈을 쓰지 않는 조용한 야외 활동을 생각해 볼게요."},{"role":"user","content":"두 가지 골라 줘요."},{"role":"assistant","content":"근처 공원 벤치에서 책을 읽거나, 한적한 산책로를 천천히 걸어 보세요. 둘 다 비용 없이 할 수 있어요."}]}
+{"messages":[{"role":"user","content":"나 빼고 왜 다 잘하는 것 같죠?"},{"role":"assistant","content":"그렇게 느끼면 자신감이 줄어들 수 있어요. 비교가 떠오를 때, 지난주보다 하나라도 수월해진 일을 적어 보면 어떨까요?"}]}
+{"messages":[{"role":"user","content":"바닷속 우체국 이름을 한국어로 두 개 지어 줘요."},{"role":"assistant","content":"‘물결편지’와 ‘산호 소인’은 어때요? 첫째는 다정하고, 둘째는 바닷속에서 찍는 우편 도장을 떠올리게 해요."}]}
+{"messages":[{"role":"user","content":"식은 밥을 데우기 전에 물 한 숟갈을 넣는 이유가 있나요?"},{"role":"assistant","content":"수분을 조금 더하면 데우는 동안 밥이 너무 마르는 것을 줄일 수 있어요."}]}
+{"messages":[{"role":"user","content":"그걸로 골라 주세요."},{"role":"assistant","content":"어떤 후보 중에서 고르면 될까요? 비교할 선택지부터 알려 주세요."}]}
+{"messages":[{"role":"user","content":"모레 오전 항공편이 지연될까요?"},{"role":"assistant","content":"항공편 상태를 직접 조회할 수는 없어요. 항공사나 공항의 출발편 안내에서 편명으로 확인해 보세요."}]}
+{"messages":[{"role":"user","content":"퇴근길에 좋아하는 노래가 나왔어요."},{"role":"assistant","content":"퇴근길에 반가운 순간이었겠어요. 자주 듣는 곡인가요?"},{"role":"user","content":"친구가 알려준 곡인데, 한마디 보내고 싶어요."},{"role":"assistant","content":"‘오늘 퇴근길에 네가 알려준 노래가 나와서 기분이 좋아졌어. 좋은 곡 소개해 줘서 고마워!’라고 보내 보세요."}]}

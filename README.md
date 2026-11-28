@@ -2,9 +2,48 @@
 
 [2023년 시연 영상: 디스코드 챗봇 제작 (오늘의 개발노트 p.340)](https://www.youtube.com/watch?v=0cbJv22SdaA)
 
-2023년판과 달리 AI 응답은 외부 API나 API 키 없이 내 컴퓨터의 체크포인트에서 생성합니다. PyTorch로 구현한 소형 문자 단위 Transformer를 사전 학습 가중치 없이 처음부터 학습합니다. 디스코드 연결에는 인터넷과 디스코드 봇 토큰이 필요하지만, 모델 학습·평가·직접 질문은 설치 후 오프라인에서 할 수 있습니다.
+NewAI는 내 컴퓨터의 모델로 답하는 디스코드 봇이에요. 설치와 모델 다운로드가 끝나면 텍스트 생성·음성 인식·음성 합성에 외부 AI 서비스나 키가 필요 없어요. 디스코드에 접속할 때는 인터넷과 봇 토큰이 필요해요.
 
-**디스코드 테스트 기본값은 [일상 대화 검색 모델](docs/daily-model.md)입니다.** 생성형 Transformer 실험은 비교 및 재학습용으로 남아 있습니다. 검색 모델은 Python 표준 라이브러리만 사용하며, 검수한 10개 상황에 답하고 확신이 낮으면 다시 물어봅니다.
+**기본값은 [일상 대화 검색 모델](docs/daily-model.md) 그대로예요.** 새로운 문맥 생성과 음성은 아래처럼 직접 켤 수 있어요. [출처·평가·학습 재현 보고서](docs/context-voice.md)에는 두 모델의 실제 응답과 실패 사례를 함께 실었어요.
+
+## 새 문맥·음성 모드 실행
+
+Node.js 22.12 이상과 Python 3.11을 준비하고 저장소 폴더에서 실행하세요. 먼저 텍스트만 확인할 수 있어요. 이 모드에는 PyTorch가 필요 없어요.
+
+```sh
+npm ci
+python model/fetch_runtime.py context
+node model/gguf-context.mjs ask "달에 있는 빵집 이름을 세 개 지어 줘요."
+```
+
+음성도 쓰려면 Python 가상 환경을 만들고, 아래 [준비](#1-준비)처럼 활성화한 다음 실행하세요.
+
+```sh
+python -m pip install -r model/requirements-voice.txt
+python model/fetch_runtime.py voice
+```
+
+모델은 기본적으로 홈 폴더의 `.cache/newai`에 받아요(문맥 모델 약 1.1 GB, 음성 모델 합계 약 260 MB). 다른 곳을 쓰려면 다운로드와 실행 전에 `NEWAI_MODEL_ROOT`를 같은 절대 경로로 설정하세요. 모델이나 녹음은 Git 저장소에 포함하지 않아요.
+
+아래 [디스코드 실행](#3-디스코드-실행)대로 로컬에서 토큰을 설정한 뒤, 다음 중 사용하는 터미널에 맞는 명령을 실행하세요. 텍스트만 쓰려면 `NEWAI_VOICE`를 설정하는 줄은 빼세요.
+
+```powershell
+# Windows PowerShell
+$env:NEWAI_ENGINE = 'context'
+$env:NEWAI_VOICE = '1'
+npm start
+```
+
+```sh
+# macOS/Linux
+export NEWAI_ENGINE=context
+export NEWAI_VOICE=1
+npm start
+```
+
+- **텍스트:** 채널에서 실제 봇을 선택해 멘션하고 `내 화분 이름은 초롱이에요`, 이어서 `화분 이름이 뭐였죠?`를 각각 보내세요. 같은 사용자·채널의 최근 문답 최대 3쌍을 메모리에만 유지해요. 15분 동안 쓰지 않거나 `@NewAI 대화 초기화`를 보내면 지워요. 디스코드에 보낸 메시지 자체는 삭제하지 않아요.
+- **음성:** 테스트 서버에서 봇에 **연결·말하기** 권한을 주고 일반 음성 채널에 들어가세요. 텍스트 채널에서 `@NewAI 음성 시작`을 보내면 봇이 먼저 듣고, `@NewAI 음성 시작 인사`를 보내면 합성 음성으로 먼저 인사해요. 답변은 채널의 다른 사람에게도 들려요. 처음에는 혼자 있거나 모두가 동의한 테스트 채널에서 짧게 말해 보세요.
+- **종료:** `@NewAI 음성 종료`를 보내거나 음성 채널에서 나오세요. 봇은 한 번에 세션 하나에서 시작한 사람의 음성만 처리하고, 녹음과 음성 대화 내용을 파일에 남기거나 학습에 쓰지 않아요. 듣기와 말하기는 번갈아 진행해요. 실제 디스코드 통화는 아래 보고서의 점검 순서로 확인해 주세요.
 
 ## 일상 대화 모델 받기
 
@@ -128,8 +167,8 @@ export DISCORD_BOT_TOKEN='<내 봇 토큰>'
 npm start
 ```
 
-서버 채널에서 `@봇이름 질문`으로 호출하세요. 봇을 직접 멘션한 메시지에만 답하며 대화 기록을 저장하지 않습니다. `npm start`의 기본 체크포인트는 `checkpoints/daily-final/model.json`입니다. 다른 Python 실행 파일을 쓰려면 `NEWAI_PYTHON`에 그 경로를, 비교용 `.pt`를 사용하려면 `NEWAI_CHECKPOINT`에 그 파일 경로를 지정하세요.
+서버 채널에서 `@봇이름 질문`으로 호출하세요. 봇을 직접 멘션한 메시지에만 답합니다. `npm start`의 기본 체크포인트는 `checkpoints/daily-final/model.json`입니다. `NEWAI_ENGINE=daily`로 돌아가면 이 기본 동작을 쓸 수 있습니다. 다른 Python 실행 파일을 쓰려면 `NEWAI_PYTHON`에 그 경로를, 기존 문자 단위 비교용 `.pt`를 사용하려면 `NEWAI_CHECKPOINT`에 그 파일 경로를 지정하세요.
 
 ## 개발 점검
 
-Python 환경을 활성화한 상태에서 `npm test`를 실행하면, 합성 데이터로 학습·재개·테스트 평가·로컬 응답을 점검합니다. 디스코드 접속이나 실제 답변 품질을 검사하는 테스트는 아닙니다.
+PyTorch가 설치된 Python 환경에서 `npm test`를 실행하면 기존 모델 학습·재개와 문맥 분리, 음성 패킷 처리를 점검합니다. 모델 다운로드 없이 문맥·음성 기본 점검만 실행하려면 `node --test test/context-voice.test.js`를 쓰세요. 음성 왕복을 확인하는 방법은 [보고서](docs/context-voice.md#음성-검증)에 있습니다.
